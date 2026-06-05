@@ -6,18 +6,17 @@ int main()
 {
     FILE *in = stdin;
     char *pthrowawy = calloc(1000, sizeof(char));
-    // Read first line
-    fgets(pthrowawy, 1000, in);
-    // Read second line
-    fgets(pthrowawy, 1000, in);
-    free(pthrowawy);
-    // Read third line
+    fgets(pthrowawy, 1000, in); // P6
+
     char *pdimensions = calloc(1000, sizeof(char));
-    fgets(pdimensions, 1000, in);
+    fgets(pdimensions, 1000, in); // 360 360
+    int width, height;
+    sscanf(pdimensions, "%d %d", &width, &height);
+    free(pdimensions);
 
+    fgets(pthrowawy, 1000, in); // 255
+    free(pthrowawy);
 
-    const int width = 900;
-    const int height = 600;
     SDL_Init(SDL_INIT_VIDEO);
     printf("Hello, World!\n");
     SDL_Window *pwindow = SDL_CreateWindow("Image Viewer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
@@ -31,9 +30,9 @@ int main()
         for (int x = 0; x < width; x++)
         {
             Uint8 r, g, b;
-            r = (Uint8) getchar();
-            g = (Uint8) getchar();
-            b = (Uint8) getchar();
+            r = (Uint8) fgetc(in);
+            g = (Uint8) fgetc(in);
+            b = (Uint8) fgetc(in);
             color = SDL_MapRGB(psurface->format, r, g, b);
             pixel.x = x;
             pixel.y = y;
